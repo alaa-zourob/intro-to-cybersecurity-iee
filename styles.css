@@ -4,7 +4,7 @@ body { outline: 3px solid magenta !important; }
   --brand:#367F27;
   --brand-dark:#2B661F;
   --accent:#D33B3C;
-  --overlay: rgba(0,0,0,0.62);
+  --overlay: rgba(0,0,0,0.35);
   --card: rgba(255,255,255,0.12);
   --card-border: rgba(255,255,255,0.25);
   --text:#f8fafc;
@@ -16,8 +16,12 @@ body{
   margin:0;
   font-family:"Cairo", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
   color:var(--text);
-  background:#0b1220;
+  background:
+    radial-gradient(1200px 600px at 15% 8%, rgba(54,127,39,.20), transparent 60%), /* من الأخضر */
+    radial-gradient(1000px 520px at 85% 12%, rgba(211,59,60,.15), transparent 65%), /* من الأحمر */
+    linear-gradient(180deg, #122b53 0%, #0f2346 55%, #0d1e3a 100%); /* أزرق أفتح */
 }
+
 
 /* ===== HERO ===== */
 .hero{
@@ -28,13 +32,52 @@ body{
     linear-gradient(180deg, #0b1220 0%, #0a101b 60%, #0b1220 100%);
   isolation:isolate;
 }
-.hero::before{content:""; position:absolute; inset:0; background:var(--overlay); z-index:0}
-.hero::after{content:""; position:absolute; inset:0; z-index:0; opacity:.15; mix-blend-mode:soft-light;
+/* غطاء خفيف فوق خلفية الـ HERO */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  /* أفتح: خفّضنا التعتيم وخلطنا درجات من ألوان الشعار */
   background:
-    repeating-linear-gradient(to right, rgba(255,255,255,.05) 0, rgba(255,255,255,.05) 1px, transparent 1px, transparent 40px),
-    repeating-linear-gradient(to bottom, rgba(255,255,255,.05) 0, rgba(255,255,255,.05) 1px, transparent 1px, transparent 40px);
+    radial-gradient(900px 380px at 20% 15%, rgba(54,127,39,.18), transparent 60%),
+    radial-gradient(900px 420px at 85% 20%, rgba(211,59,60,.12), transparent 65%),
+    rgba(0,0,0,.22); /* غطاء أسود خفيف بدل var(--overlay) */
+  z-index:0;
 }
-.hero-inner{ position:relative; z-index:1; width:min(900px, 92vw); padding:2rem }
+
+/* شبكة زخرفية خفيفة جدًا فوق الغطاء */
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  opacity:.06;               /* كان .15 -> جعلناه أخف */
+  mix-blend-mode:soft-light; /* يخلط الشبكة بلطف مع الخلفية */
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(255,255,255,.08) 0,
+      rgba(255,255,255,.08) 1px,
+      transparent 1px,
+      transparent 42px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,.08) 0,
+      rgba(255,255,255,.08) 1px,
+      transparent 1px,
+      transparent 42px
+    );
+}
+
+/* تأكدي يبقى المحتوى فوق الطبقتين */
+.hero-inner{
+  position:relative;
+  z-index:1;
+  width:min(900px, 92vw);
+  padding:2rem;
+}
+
 
 .badge{
   display:inline-block; padding:.35rem .75rem; border:1px solid var(--card-border);
@@ -88,8 +131,15 @@ h2.title{
 .btn-whatsapp:hover{ filter:saturate(1.1) }
 
 /* ===== FORM ===== */
-section#register{ scroll-margin-top:24px; padding:4rem 1rem 5rem;
-  background:linear-gradient(180deg, #0b1220 0%, #0d1526 60%, #0b1220 100%); display:flex;justify-content:center }
+section#register{
+  scroll-margin-top:24px; padding:4rem 1rem 5rem;
+  background:
+    radial-gradient(900px 420px at 20% 20%, rgba(54,127,39,.14), transparent 60%),
+    radial-gradient(900px 420px at 80% 15%, rgba(211,59,60,.10), transparent 60%),
+    linear-gradient(180deg, #112347 0%, #0f2041 60%, #101f3a 100%);
+  display:flex; justify-content:center;
+}
+
 .form-card{
   width:min(920px, 94vw); background:rgba(255,255,255,.06); border:1px solid var(--card-border);
   border-radius:18px; padding:1.4rem; box-shadow:0 20px 50px rgba(0,0,0,.35); backdrop-filter: blur(8px);

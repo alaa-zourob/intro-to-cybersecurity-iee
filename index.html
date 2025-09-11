@@ -87,10 +87,9 @@
         <div class="field col-6">
           <label for="phone">رقم الجوال (واتساب) <span class="required">*</span></label>
           <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
-                 placeholder="05XXXXXXXX"
-                 pattern="^(05|\\+9705|\\+9725)\\d{7,8}$"
-                 title="أدخل رقمًا بصيغة 05XXXXXXXX أو +9705XXXXXXXX" required />
-          <div class="hint">اكتبه مع المقدمة المحلية 05 أو الدولية +9705 / +9725</div>
+       placeholder="05XXXXXXXX" />
+
+          <div class="hint">+970 +972 </div>
         </div>
 
         <div class="field col-4">
@@ -200,62 +199,87 @@
 
   <!-- Scripts (ضعية قبل إغلاق body) -->
   <script>
-    // تمرير سلس داخل الصفحة
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        const id = a.getAttribute('href');
-        if(id && id.length>1){
-          e.preventDefault();
-          document.querySelector(id)?.scrollIntoView({behavior:'smooth'});
-        }
+  // تمرير سلس
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id = a.getAttribute('href');
+      if(id && id.length>1){
+        e.preventDefault();
+        document.querySelector(id)?.scrollIntoView({behavior:'smooth'});
+      }
+    });
+  });
+
+  // عناصر الفورم
+  const form = document.getElementById('signupForm');
+  const msg  = document.getElementById('msg');
+  const submitBtn = document.getElementById('submitBtn');
+
+  // رابط Google Apps Script (ينتهي بـ /exec)
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx1HE0PqgYGgYAhZogPLpRy3uurZhQz0YSmqsaw37We_RkY9xVCT0ADo88yS4jl8OAa/exec';
+
+  // دالة: تحويل الأرقام العربية -> إنجليزية
+  const toEnglishDigits = s => s.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+
+  // دالة: تنظيف النص
+  const clean = s => (s ?? '').toString().trim().replace(/\s+/g,' ');
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+
+    // honeypot (لو روبوت)
+    if (form.website && form.website.value) return;
+
+    // نجمع البيانات وننظّفها (بدون منع الإرسال)
+    const fd = new FormData(form);
+
+    // تنظيف مدخلات أساسية
+    fd.set('fullName', clean(fd.get('fullName')));
+    fd.set('university', clean(fd.get('university')));
+    fd.set('email', clean(fd.get('email')));
+
+    // تنظيف الجوال: إزالة المسافات والرموز غير الضرورية + تحويل أرقام عربية
+    let phone = (fd.get('phone') ?? '').toString();
+    phone = toEnglishDigits(phone).replace(/[^\d+]/g,''); // نبقي الأرقام و +
+    fd.set('phone', phone);
+
+    // موافقة: لو مش مؤشر، نرسلها false (ولا نمنع الإرسال)
+    const agree = document.getElementById('agree')?.checked ? 'true' : 'false';
+    fd.set('agree', agree);
+
+    // نكوّن جسم JSON يدويًا (من غير أي تحقّق يوقف الإرسال)
+    const data = {};
+    for (const [k,v] of fd.entries()) data[k] = v;
+
+    // واجهة المستخدم
+    submitBtn.disabled = true;
+    const oldText = submitBtn.textContent;
+    submitBtn.textContent = 'جاري الإرسال...';
+    msg.textContent = '';
+    
+    try {
+      await fetch(WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        // ملاحظة: مع no-cors يُفضَّل عدم ضبط Content-Type مخصص
+        body: JSON.stringify(data)
       });
-    });
 
-    // عناصر الفورم
-    const form = document.getElementById('signupForm');
-    const msg  = document.getElementById('msg');
-    const submitBtn = document.getElementById('submitBtn');
+      // نعرض نجاح دائمًا بعد الإرسال (حتى مع استجابة opaque)
+      msg.textContent = 'تم استلام طلبك بنجاح! سنقوم بالتواصل قريبًا.';
+      msg.style.color = '#bbf7d0';
+      form.reset();
+    } catch (err) {
+      // حتى في حال الخطأ، ما نوقف المستخدم — فقط نعرض تنبيه
+      console.error(err);
+      msg.textContent = 'تم إرسال الطلب. في حال لم يصلك إشعار، أعيدي المحاولة لاحقًا.';
+      msg.style.color = '#fecaca';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = oldText;
+    }
+  });
+</script>
 
-    // رابط Google Apps Script (ينتهي بـ /exec)
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx1HE0PqgYGgYAhZogPLpRy3uurZhQz0YSmqsaw37We_RkY9xVCT0ADo88yS4jl8OAa/exec';
-
-    form.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-
-      // honeypot
-      if (form.website && form.website.value) return;
-
-      if(!form.checkValidity()){
-        msg.textContent = 'تأكدي من تعبئة الحقول المطلوبة بشكل صحيح.';
-        msg.style.color = '#fecaca';
-        return;
-      }
-
-      submitBtn.disabled = true;
-      const oldText = submitBtn.textContent;
-      submitBtn.textContent = 'جاري الإرسال...';
-
-      const data = Object.fromEntries(new FormData(form).entries());
-
-      try {
-        await fetch(WEB_APP_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-
-        msg.textContent = 'تم استلام طلبك بنجاح! سنقوم بالتواصل قريبًا.';
-        msg.style.color = '#bbf7d0';
-        form.reset();
-      } catch (err) {
-        msg.textContent = 'حدث خطأ غير متوقع. يرجى المحاولة مجددًا.';
-        msg.style.color = '#fecaca';
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = oldText;
-      }
-    });
-  </script>
 </body>
 </html>
