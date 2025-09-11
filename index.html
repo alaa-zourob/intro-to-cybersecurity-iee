@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>فورم تسجيل لورشة سايبر سيكيورتي - 19/9</title>
+
+  <!-- Performance: font preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- SEO / Share -->
+  <meta name="description" content="ورشة Cybersecurity تأسيسية مقدّمة من IEEE – الجامعة الإسلامية. سجّل الآن.">
+  <meta property="og:title" content="ورشة Cybersecurity – التسجيل">
+  <meta property="og:description" content="من التمهيدات إلى حماية جهازك — سجّل الآن.">
+  <meta property="og:image" content="ieee-share.png">
+  <meta property="og:locale" content="ar_AR">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="badge">ورشة مقدّمة من <strong>فرع IEEE – الجامعة الإسلامية</strong></span>
+
+      <div class="logo-wrap">
+        <img src="ieee.png" alt="شعار IEEE" />
+      </div>
+
+      <h2 class="title">فورم تسجيل لورشة <strong>Cybersecurity</strong></h2>
+
+      <p class="lead">
+        ورشة تأسيسية عملية في مجال <strong>Cybersecurity</strong> يقدمها 
+        <strong>المهندس: براء المصطفى </strong> سنتعرّف خلالها على:
+      </p>
+
+      <ul class="features">
+        <li><strong>التهديدات والثغرات</strong> الشائعة</li>
+        <li><strong>إدارة كلمات المرور</strong> وأفضل الممارسات</li>
+        <li><strong>أساسيات التشفير</strong></li>
+        <li>طرق <strong>حماية جهازك وشبكتك</strong></li>
+      </ul>
+
+      <p class="lead">
+        هذه الورشة هي <strong>الخطوة المناسبة</strong> لطلاب الجامعات والمهتمين لبدء
+        <strong>مسار مهني قوي</strong> في مجال <strong>Cybersecurity</strong>.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn" href="#register">سجّل الآن</a>
+        <a class="btn btn-whatsapp"
+           href="https://chat.whatsapp.com/Leq1sgGBf3D3uvpOxnOj9R?mode=ems_copy_t"
+           target="_blank" rel="noopener noreferrer">الانضمام إلى جروب الواتساب</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- REGISTER SECTION -->
+  <section id="register">
+    <div class="form-card">
+      <div class="form-header">
+        <h2>نموذج التسجيل</h2>
+        <span class="pill form-note">العدد محدود ◦ الأولوية بأسبقية التسجيل</span>
+      </div>
+
+      <form id="signupForm" novalidate>
+        <div class="field col-6">
+          <label for="fullName">الاسم الكامل <span class="required">*</span></label>
+          <input id="fullName" name="fullName" type="text" placeholder="اكتب اسمك الثلاثي"
+                 autocomplete="name" required />
+        </div>
+
+        <div class="field col-6">
+          <label for="university">الجامعة <span class="required">*</span></label>
+          <input id="university" name="university" type="text" placeholder="مثال: الجامعة الإسلامية" required />
+        </div>
+
+        <div class="field col-6">
+          <label for="email">البريد الإلكتروني <span class="required">*</span></label>
+          <input id="email" name="email" type="email" placeholder="name@example.com"
+                 autocomplete="email" inputmode="email" required />
+        </div>
+
+        <div class="field col-6">
+          <label for="phone">رقم الجوال (واتساب) <span class="required">*</span></label>
+          <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
+                 placeholder="05XXXXXXXX"
+                 pattern="^(05|\\+9705|\\+9725)\\d{7,8}$"
+                 title="أدخل رقمًا بصيغة 05XXXXXXXX أو +9705XXXXXXXX" required />
+          <div class="hint">اكتبه مع المقدمة المحلية 05 أو الدولية +9705 / +9725</div>
+        </div>
+
+        <div class="field col-4">
+          <label for="track">ما سبب اهتمامك بالورشة؟</label>
+          <select id="track" name="track">
+            <option value="intro" selected>التعرف على المجال لأول مرة</option>
+            <option value="network">تطوير مهاراتي الأكاديمية</option>
+            <option value="web">دعم مسيرتي المهنية</option>
+          </select>
+        </div>
+
+        <div class="field col-4">
+          <label for="level">هل لديك أي معرفة سابقة في مجال الأمن السيبراني؟</label>
+          <select id="level" name="level">
+            <option value="beginner" selected>مبتدئ</option>
+            <option value="intermediate">متوسط</option>
+            <option value="advanced">متقدم</option>
+          </select>
+        </div>
+
+        <div class="field col-12">
+          <label for="notes">ملاحظات أو أسئلة</label>
+          <textarea id="notes" name="notes" rows="4" placeholder="اكتب أي ملاحظة تحتاجها (اختياري)" dir="auto"></textarea>
+        </div>
+
+        <!-- Honeypot مضاد سبام -->
+        <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" hidden>
+
+        <fieldset class="field col-12 consent">
+          <legend>الموافقة</legend>
+          <label class="check"><input type="checkbox" id="agree" required> أوافق على استخدام بياناتي لأغراض تنظيم الورشة والتواصل.</label>
+        </fieldset>
+
+        <div class="actions field col-12">
+          <button class="btn" type="submit" id="submitBtn">تأكيد التسجيل</button>
+          <button class="btn btn-outline" type="reset">مسح الحقول</button>
+        </div>
+
+        <div id="msg" class="note" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>للتواصل والمتابعة:</div>
+    <nav class="socials" aria-label="روابط التواصل الاجتماعي">
+      <!-- Instagram -->
+      <a class="instagram" href="https://www.instagram.com/ieee_std_iug?igsh=MXg4d25mNDcwZnBxZA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9 
+            0 63.6 51.3 114.9 114.9 114.9 
+            63.6 0 114.9-51.3 114.9-114.9 
+            0-63.6-51.3-114.9-114.9-114.9zm0 190.5c-41.7 
+            0-75.6-33.9-75.6-75.6 
+            0-41.7 33.9-75.6 75.6-75.6 
+            41.7 0 75.6 33.9 75.6 75.6 
+            0 41.7-33.9 75.6-75.6 75.6zm146.4-194.3c0 
+            14.9-12 26.9-26.9 26.9-14.9 
+            0-26.9-12-26.9-26.9 
+            0-14.9 12-26.9 26.9-26.9 
+            14.9 0 26.9 12 26.9 26.9zm76.1 
+            27.2c-1.7-35.7-9.9-67.3-36.2-93.6-26.3-26.3-57.9-34.5-93.6-36.2-37-2.1-147.9-2.1-184.9 
+            0-35.7 1.7-67.3 9.9-93.6 36.2-26.3 26.3-34.5 57.9-36.2 
+            93.6-2.1 37-2.1 147.9 0 
+            184.9 1.7 35.7 9.9 67.3 36.2 93.6 
+            26.3 26.3 57.9 34.5 93.6 
+            36.2 37 2.1 147.9 2.1 184.9 
+            0 35.7-1.7 67.3-9.9 93.6-36.2 
+            26.3-26.3 34.5-57.9 36.2-93.6 
+            2.1-37 2.1-147.9 0-184.9zm-48.5 
+            224.5c-7.8 19.6-22.9 34.7-42.6 
+            42.6-29.5 11.7-99.5 9-132.4 
+            9s-102.9 2.6-132.4-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.4s-2.6-102.9 
+            9-132.4c7.8-19.6 22.9-34.7 42.6-42.6 
+            29.5-11.7 99.5-9 132.4-9s102.9-2.6 
+            132.4 9c19.6 7.8 34.7 22.9 
+            42.6 42.6 11.7 29.5 9 99.5 
+            9 132.4s2.6 102.9-9 132.4z"/>
+        </svg>
+      </a>
+
+      <!-- Facebook -->
+      <a class="facebook" href="https://www.facebook.com/share/1D6mWNciSt/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+        </svg>
+      </a>
+
+      <!-- LinkedIn -->
+      <a class="linkedin" href="https://www.linkedin.com/in/ieee-student-branch-iug-0b61561b3?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="4.5" cy="4.5" r="2.5"></circle>
+          <rect x="3" y="9" width="3" height="12" rx="1"></rect>
+          <path d="M10 9h3v1.9h.05c.55-1.05 2-2.1 4.2-2.1 3.9 0 4.75 2.6 4.75 6.02V21h-3.5v-5.6c0-1.7-.03-3.85-2.35-3.85-2.35 0-2.71 1.83-2.71 3.73V21H10V9z"></path>
+        </svg>
+      </a>
+
+      <!-- WhatsApp -->
+      <a class="whatsapp" href="https://chat.whatsapp.com/FSN2Cf8WbHIGLRcwSSpW90?mode=ems_copy_c" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.15-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.173.198-.297.298-.495.099-.198.05-.372-.025-.521-.075-.149-.672-1.611-.921-2.206-.242-.579-.487-.5-.672-.51l-.572-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.051 21.785h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.999-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26C2.168 6.443 6.6 2.01 12.052 2.01c2.64.001 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.436 9.884-9.882 9.884z"></path>
+        </svg>
+      </a>
+    </nav>
+  </footer>
+
+  <!-- Scripts (ضعية قبل إغلاق body) -->
+  <script>
+    // تمرير سلس داخل الصفحة
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        if(id && id.length>1){
+          e.preventDefault();
+          document.querySelector(id)?.scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+
+    // عناصر الفورم
+    const form = document.getElementById('signupForm');
+    const msg  = document.getElementById('msg');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // رابط Google Apps Script (ينتهي بـ /exec)
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx1HE0PqgYGgYAhZogPLpRy3uurZhQz0YSmqsaw37We_RkY9xVCT0ADo88yS4jl8OAa/exec';
+
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+
+      // honeypot
+      if (form.website && form.website.value) return;
+
+      if(!form.checkValidity()){
+        msg.textContent = 'تأكدي من تعبئة الحقول المطلوبة بشكل صحيح.';
+        msg.style.color = '#fecaca';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      const oldText = submitBtn.textContent;
+      submitBtn.textContent = 'جاري الإرسال...';
+
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      try {
+        await fetch(WEB_APP_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        msg.textContent = 'تم استلام طلبك بنجاح! سنقوم بالتواصل قريبًا.';
+        msg.style.color = '#bbf7d0';
+        form.reset();
+      } catch (err) {
+        msg.textContent = 'حدث خطأ غير متوقع. يرجى المحاولة مجددًا.';
+        msg.style.color = '#fecaca';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = oldText;
+      }
+    });
+  </script>
+</body>
+</html>
